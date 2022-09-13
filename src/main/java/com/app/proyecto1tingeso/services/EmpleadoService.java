@@ -22,11 +22,10 @@ public class EmpleadoService {
         return empleadoRepository.save(empleado);}
 
     public Optional<EmpleadoEntity> obtenerPorId(Long id){
-        return empleadoRepository.findById(id)}
+        return empleadoRepository.findById(id);}
 
     public EmpleadoEntity obtenerPorRut(String rut){
-        return empleadoRepository.findByRut(rut);
-    }
+        return empleadoRepository.findByRut(rut);}
 
     public boolean eliminarEmpleado(Long id){
         try{
