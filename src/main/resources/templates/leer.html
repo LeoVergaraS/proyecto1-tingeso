@@ -7,7 +7,7 @@
 </head>
 <body>
   <div class="container">
-    <form th:action="@{/cargar}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/archivos/cargar}" method="post" enctype="multipart/form-data">
       <div class="card">
         <div class="card-header">
           <h2>Carga de archivos</h2>
@@ -18,7 +18,7 @@
         </div>
         <div class="card-footer">
           <input type="submit" value="Guardar" class="btn btn-success">
-          <a href="/" class="btn btn-primary" role="button">Volver</a>
+          <a href="/ingresos_salidas/listar" class="btn btn-primary" role="button">Volver</a>
         </div>
       </div>
     </form>

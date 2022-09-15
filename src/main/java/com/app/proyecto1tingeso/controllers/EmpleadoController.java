@@ -23,6 +23,7 @@ public class EmpleadoController {
     @GetMapping("/listar")
     public String listar(Model model){
         ArrayList<EmpleadoEntity>empleados=empleadoService.obtenerEmpleados();
+        System.out.println(empleados);
         model.addAttribute("empleados",empleados);
         return "listar";
     }

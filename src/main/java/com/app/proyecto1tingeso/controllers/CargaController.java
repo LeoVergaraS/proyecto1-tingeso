@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping
+@RequestMapping("/archivos")
 public class CargaController {
 
     @Autowired
@@ -23,9 +23,8 @@ public class CargaController {
     }
 
     @PostMapping("/cargar")
-    public String carga(@RequestParam("archivos") MultipartFile archivo, RedirectAttributes ms){
+    public String carga(@RequestParam("archivos") MultipartFile archivo){
         cargaService.guardarArchivo(archivo);
-        ms.addFlashAttribute("mensaje","Archivo guardado correctamente!!");
-        return "redirect:/leer";
+        return "redirect:/ingresos_salidas/guardar";
     }
 }
