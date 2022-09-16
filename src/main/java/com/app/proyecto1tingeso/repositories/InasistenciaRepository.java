@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InasistenciaRepository extends JpaRepository<InasistenciaEntity, Long> {
-    public InasistenciaEntity findByRut(String rut);
 }

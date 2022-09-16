@@ -25,10 +25,6 @@ public class InasistenciaService {
         return inasistenciaRepository.findById(id);
     }
 
-    public InasistenciaEntity obtenerPorRut(String rut){
-        return inasistenciaRepository.findByRut(rut);
-    }
-
     public boolean eliminarInasistencia(long id){
         try{
             inasistenciaRepository.deleteById(id);
