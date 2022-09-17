@@ -25,6 +25,10 @@ public class InasistenciaService {
         return inasistenciaRepository.findById(id);
     }
 
+    public void actualizarJustificativo(long id, int d){
+        inasistenciaRepository.updateInasistenciaByJustificados(d, id);
+    }
+
     public boolean eliminarInasistencia(long id){
         try{
             inasistenciaRepository.deleteById(id);

@@ -24,6 +24,7 @@ public class IngresoSalidaService {
     public ArrayList<IngresoSalidaEntity> obtenerIngresoSalida(){
         return (ArrayList<IngresoSalidaEntity>) ingresoSalidaRepository.findAll();
     }
+
     private ArrayList<IngresoSalidaEntity> ingresosEmpleados(ArrayList<String[]> infoSeparada,ArrayList<IngresoSalidaEntity> ingresosSalidas) throws ParseException{
         int n = infoSeparada.size();
         for(int i=0;i<n/2;i++){
@@ -62,6 +63,7 @@ public class IngresoSalidaService {
         ingresosSalidas = salidaEmpleados(informacionSeparada,ingresosSalidas);
         return ingresosSalidas;
     }
+    
     public ArrayList<IngresoSalidaEntity> transformarInformacion(){
         String temp;
         String texto = "";

@@ -23,7 +23,6 @@ public class EmpleadoController {
     @GetMapping("/listar")
     public String listar(Model model){
         ArrayList<EmpleadoEntity>empleados=empleadoService.obtenerEmpleados();
-        System.out.println(empleados);
         model.addAttribute("empleados",empleados);
         return "listar";
     }
@@ -43,9 +42,8 @@ public class EmpleadoController {
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable long id, Model model){
         Optional<EmpleadoEntity> empleado=empleadoService.obtenerPorId(id);
-        model.addAttribute("empleado",empleado);
+        model.addAttribute("empleado",empleado.get());
         return "form";
-
     }
 
     @GetMapping("/eliminar/{id}")
