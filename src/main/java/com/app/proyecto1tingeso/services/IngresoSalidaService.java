@@ -25,56 +25,30 @@ public class IngresoSalidaService {
         return (ArrayList<IngresoSalidaEntity>) ingresoSalidaRepository.findAll();
     }
 
-    private ArrayList<IngresoSalidaEntity> ingresosEmpleados(ArrayList<String[]> infoSeparada,ArrayList<IngresoSalidaEntity> ingresosSalidas) throws ParseException{
-        int n = infoSeparada.size();
-        for(int i=0;i<n/2;i++){
-            Date fecha = new Date(new SimpleDateFormat("yyyy/MM/dd").parse(infoSeparada.get(i)[0]).getTime());
-            Time hora_ingreso = new Time((new SimpleDateFormat("HH:mm").parse(infoSeparada.get(i)[1])).getTime());
-            String rut = infoSeparada.get(i)[2];
-            IngresoSalidaEntity is = new IngresoSalidaEntity(null, fecha, hora_ingreso, null, rut);
-            ingresosSalidas.add(is);
-        }
-        return ingresosSalidas;
-    }
 
-    private ArrayList<IngresoSalidaEntity> salidaEmpleados(ArrayList<String[]> infoSeparada,ArrayList<IngresoSalidaEntity> ingresosSalidas) throws ParseException{
-        int n = infoSeparada.size();
-        for(int i=n/2;i<n;i++){
-            Time hora_salida = new Time((new SimpleDateFormat("HH:mm").parse(infoSeparada.get(i)[1])).getTime());
-            String rut = infoSeparada.get(i)[2];
-            for(int j=0;j < ingresosSalidas.size();j++){
-                if(ingresosSalidas.get(j).getRut_empleado().equals(rut)){
-                    ingresosSalidas.get(j).setHora_salida(hora_salida);
-                    break;
-                }
-            }
-        }
-        return ingresosSalidas;
-    }
+    public IngresoSalidaEntity lineaAIngresoSalidaEntity(String linea) throws ParseException{
+        // Se separa la linea por los ;
+        String[] lineaSeparada =  linea.split(";");
 
-    private ArrayList<IngresoSalidaEntity> stringAIngresoSalidaEntity(String texto) throws ParseException {
-        ArrayList<IngresoSalidaEntity> ingresosSalidas = new ArrayList<>();
-        ArrayList<String[]> informacionSeparada = new ArrayList<>();
-        String[] informacionPorLinea = texto.split("\n");
-        for(String elemento:informacionPorLinea){
-            informacionSeparada.add(elemento.split(";"));
-        }
-        ingresosSalidas = ingresosEmpleados(informacionSeparada,ingresosSalidas);
-        ingresosSalidas = salidaEmpleados(informacionSeparada,ingresosSalidas);
-        return ingresosSalidas;
+        Date fecha = new Date(new SimpleDateFormat("yyyy/MM/dd").parse(lineaSeparada[0]).getTime());
+        Time hora  = new Time((new SimpleDateFormat("HH:mm").parse(lineaSeparada[1])).getTime());
+        String rut = lineaSeparada[2];
+
+        IngresoSalidaEntity ingresoSalida = new IngresoSalidaEntity(null, fecha, hora, rut);
+        return ingresoSalida;
     }
     
     public ArrayList<IngresoSalidaEntity> transformarInformacion(){
-        String temp;
-        String texto = "";
+        String linea;
+        ArrayList<IngresoSalidaEntity> ingresosSalidas = new ArrayList<>();
         try{
             BufferedReader br = new BufferedReader(new FileReader("cargas//data.txt"));
-            temp = br.readLine();
-            while (temp != null){
-                texto = texto + temp + "\n";
-                temp = br.readLine();
+            linea = br.readLine();
+            while (linea != null){
+                ingresosSalidas.add(lineaAIngresoSalidaEntity(linea));
+                linea = br.readLine();
             }
-            return stringAIngresoSalidaEntity(texto);
+            return ingresosSalidas;
         }catch(FileNotFoundException ex){System.err.println(ex.getMessage());}
         catch(IOException ex){System.err.println(ex.getMessage());}
         catch (ParseException ex){System.err.println(ex.getMessage());}

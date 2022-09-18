@@ -38,7 +38,6 @@ public class InasistenciaController {
 
     @PostMapping("/guardar")
     public String crear(InasistenciaEntity inasistencia){
-        System.out.println(inasistencia);
         inasistenciaService.guardarInasistencia(inasistencia);
         return "redirect:/inasistencias/listar";
     }

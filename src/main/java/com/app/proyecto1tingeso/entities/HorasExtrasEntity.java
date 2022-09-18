@@ -1,25 +1,19 @@
 package com.app.proyecto1tingeso.entities;
 
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
-
 @Entity
-@Table(name = "ingresos_salidas")
+@Table(name = "horas_extras")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IngresoSalidaEntity {
+public class HorasExtrasEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long id;
-
-    private Date fecha;
-    private Time hora;
-    private String rut_empleado;
+    private long id;
 }

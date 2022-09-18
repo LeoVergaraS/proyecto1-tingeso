@@ -19,8 +19,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Fecha</th>
-                    <th>Hora de ingreso</th>
-                    <th>Hora de salida</th>
+                    <th>Hora</th>
                     <th>Rut empleado</th>
                 </tr>
                 </thead>
@@ -28,8 +27,7 @@
                 <tr th:each="is:${ingresosSalidas}">
                     <td th:text="${is.id}"></td>
                     <td th:text="${is.fecha}"></td>
-                    <td th:text="${is.hora_ingreso}"></td>
-                    <td th:text="${is.hora_salida}"></td>
+                    <td th:text="${is.hora}"></td>
                     <td th:text="${is.rut_empleado}"></td>
                 </tr>
                 </tbody>
