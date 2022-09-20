@@ -25,6 +25,9 @@ public class IngresoSalidaService {
         return (ArrayList<IngresoSalidaEntity>) ingresoSalidaRepository.findAll();
     }
 
+    public ArrayList<IngresoSalidaEntity> obtenerSalidas(){
+        return (ArrayList<IngresoSalidaEntity>) ingresoSalidaRepository.findSalidas();
+    }
 
     public IngresoSalidaEntity lineaAIngresoSalidaEntity(String linea) throws ParseException{
         // Se separa la linea por los ;
@@ -48,6 +51,7 @@ public class IngresoSalidaService {
                 ingresosSalidas.add(lineaAIngresoSalidaEntity(linea));
                 linea = br.readLine();
             }
+            br.close();
             return ingresosSalidas;
         }catch(FileNotFoundException ex){System.err.println(ex.getMessage());}
         catch(IOException ex){System.err.println(ex.getMessage());}
@@ -65,4 +69,6 @@ public class IngresoSalidaService {
             return false;
         }
     }
+
+    
 }

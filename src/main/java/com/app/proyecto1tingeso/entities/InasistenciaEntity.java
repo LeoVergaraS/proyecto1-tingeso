@@ -15,7 +15,7 @@ public class InasistenciaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private long id;
+    private Long id;
 
     private int mes;
     private int anio;

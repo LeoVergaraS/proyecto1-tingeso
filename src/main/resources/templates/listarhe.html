@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Horas extras</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+  <div th:replace="~{commons/navbar::topbar}" ></div>
+<div class="container-sm">
+  <div class="card">
+    <div class="card-header">
+      <h2>Horas extras</h2>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Mes</th>
+          <th>Año</th>
+          <th>Horas Extras</th>
+          <th>Autorizada</th>
+          <th>Rut empleado</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="he:${horasExtras}">
+          <td th:text="${he.id}"></td>
+          <td th:text="${he.mes}"></td>
+          <td th:text="${he.anio}"></td>
+          <td th:text="${he.cantidad_horas_extras}"></td>
+          <div th:if="${he.autorizado} == 0">
+            <td>No autorizado</td>
+          </div>
+          <div th:if="${he.autorizado} == 1">
+            <td>Autorizado</td>
+          </div>
+          <td th:text="${he.rut_empleado}"></td>
+          <td>
+            <a th:href="@{/horas_extras/autorizar/} + ${he.id}" class="btn btn-primary" role="button">Autorizar</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      <a href="/" class="btn btn-primary" role="button">Volver</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

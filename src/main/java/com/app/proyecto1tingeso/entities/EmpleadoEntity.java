@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.sql.Date;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "empleados")
@@ -13,7 +13,6 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmpleadoEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
