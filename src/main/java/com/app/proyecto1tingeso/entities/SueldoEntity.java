@@ -15,7 +15,7 @@ public class SueldoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private long id;
+    private Long id;
 
     private String rut;
     private int sueldo_fijo_mensual;
@@ -26,4 +26,6 @@ public class SueldoEntity {
     private double descuentos_previsional;
     private double descuentos_salud;
     private double sueldo_final;
+    private int mes;
+    private int anio;
 }

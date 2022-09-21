@@ -19,7 +19,7 @@ public class RRHHService {
         }
     }
 
-    public int montoHorasExtrasEmpleado(EmpleadoEntity empleado, int horasExtras){
+    public double montoHorasExtrasEmpleado(EmpleadoEntity empleado, double horasExtras){
         if(empleado.getCategoria() == 'A'){
             return horasExtras * 25000;
         }else if(empleado.getCategoria() == 'B'){
@@ -51,10 +51,10 @@ public class RRHHService {
     }
 
     public double descuentoPorAtraso(ArrayList<Integer> tiempoAtraso, int sueldoMensualFijo){
-        double monto10 = tiempoAtraso.get(0) * 0.01;
-        double monto25 = tiempoAtraso.get(1) * 0.03;
-        double monto45 = tiempoAtraso.get(2) * 0.06;
-        double monto70 = tiempoAtraso.get(3) * 0.15;
+        double monto10 = tiempoAtraso.get(0) * 0.01 * sueldoMensualFijo;
+        double monto25 = tiempoAtraso.get(1) * 0.03 * sueldoMensualFijo;
+        double monto45 = tiempoAtraso.get(2) * 0.06 * sueldoMensualFijo;
+        double monto70 = tiempoAtraso.get(3) * 0.15 * sueldoMensualFijo;
         return monto10 + monto25 + monto45 + monto70;
     }
 }
