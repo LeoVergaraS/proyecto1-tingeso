@@ -29,11 +29,4 @@ public class IngresoSalidaController {
         ingresoSalidaService.guardarIngresoSalidaDeData(ingresoSalidaService.transformarInformacion());
         return "redirect:/horas_extras/guardar";
     }
-
-    @GetMapping("/listar_salidas")
-    public String listar_salidas(Model model){
-        ArrayList<IngresoSalidaEntity> ingresosSalidas=ingresoSalidaService.obtenerSalidas();
-        model.addAttribute("ingresosSalidas",ingresosSalidas);
-        return "listaris";
-    }
 }
