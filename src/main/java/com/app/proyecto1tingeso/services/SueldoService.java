@@ -17,4 +17,8 @@ public class SueldoService {
     public ArrayList<SueldoEntity> obtenerSueldos(){
         return (ArrayList<SueldoEntity>) sueldoRepository.findAll();
     }
+
+    public SueldoEntity guardarSueldo(SueldoEntity sueldo){
+        return sueldoRepository.save(sueldo);
+    }
 }

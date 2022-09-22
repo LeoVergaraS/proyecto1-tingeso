@@ -29,11 +29,11 @@ public class RRHHService {
         }
     }
 
-    public double descuentosPrevisional(int sueldoFinal){
+    public double descuentosPrevisional(double sueldoFinal){
         return sueldoFinal * 0.1;
     }
 
-    public double descuentoSalud(int sueldoFinal){
+    public double descuentoSalud(double sueldoFinal){
         return sueldoFinal * 0.08;
     }
 

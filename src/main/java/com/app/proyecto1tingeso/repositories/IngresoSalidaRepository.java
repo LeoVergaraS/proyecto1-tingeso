@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface IngresoSalidaRepository extends JpaRepository<IngresoSalidaEntity, Long> {
     @Query(value = "SELECT * FROM ingresos_salidas i WHERE i.hora > '18:00' ", nativeQuery = true)
     public ArrayList<IngresoSalidaEntity> findSalidas();
+
 }

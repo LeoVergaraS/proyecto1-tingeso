@@ -52,6 +52,7 @@ public class HoraExtraService {
     private double calculoHorasExtras(IngresoSalidaEntity ingresoSalida){
         int horas = ingresoSalida.getHora().getHours();
         int min = ingresoSalida.getHora().getMinutes();
+        System.out.println(horas + ":" + min);
         double total = horas * 60 + min;
         return (total - 1080)/60;
     }
