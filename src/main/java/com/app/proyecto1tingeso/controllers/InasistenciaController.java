@@ -1,6 +1,8 @@
 package com.app.proyecto1tingeso.controllers;
 
+import com.app.proyecto1tingeso.entities.EmpleadoEntity;
 import com.app.proyecto1tingeso.entities.InasistenciaEntity;
+import com.app.proyecto1tingeso.services.EmpleadoService;
 import com.app.proyecto1tingeso.services.InasistenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,22 +23,27 @@ public class InasistenciaController {
     @Autowired
     InasistenciaService inasistenciaService;
 
+    @Autowired
+    EmpleadoService empleadoService;
+
     @GetMapping("/listar")
     public String listar(Model model){
         ArrayList<InasistenciaEntity>inasistencias=inasistenciaService.obtenerInasistencias();
         model.addAttribute("inasistencias",inasistencias);
-        return "listarina";
+        return "inasistencia/listar";
     }
 
     @GetMapping("/nuevo")
     public String nuevo(Model model){
         model.addAttribute("inasistencia",new InasistenciaEntity());
-        return "formina";
+        return "inasistencia/form";
     }
 
     @PostMapping("/guardar")
     public String crear(InasistenciaEntity inasistencia){
-        inasistenciaService.guardarInasistencia(inasistencia);
+        String rut = inasistencia.getRut_empleado();
+        EmpleadoEntity empleado = empleadoService.obtenerEmpleadoPorRut(rut);
+        inasistenciaService.guardarInasistencia(inasistencia, empleado);
         return "redirect:/inasistencias/listar";
     }
 
@@ -44,7 +51,7 @@ public class InasistenciaController {
     public String editar(@PathVariable long id, Model model){
         Optional<InasistenciaEntity> inasistencia=inasistenciaService.obtenerPorId(id);
         model.addAttribute("inasistencia",inasistencia.get());
-        return "formina";
+        return "inasistencia/form";
 
     }
 
@@ -58,7 +65,7 @@ public class InasistenciaController {
     public String justificar(@PathVariable long id, Model model){
         Optional<InasistenciaEntity> inasistencia=inasistenciaService.obtenerPorId(id);
         model.addAttribute("inasistencia",inasistencia.get());
-        return "justificacion";
+        return "inasistencia/justificacion";
     }
 
     @GetMapping("/eliminar/{id}")

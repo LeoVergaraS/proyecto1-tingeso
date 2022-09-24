@@ -18,6 +18,10 @@ public class EmpleadoService {
         return (ArrayList<EmpleadoEntity>) empleadoRepository.findAll();
     }
 
+    public EmpleadoEntity obtenerEmpleadoPorRut(String rut){
+        return empleadoRepository.findByRut(rut);
+    }
+
     public EmpleadoEntity guardarEmpleado(EmpleadoEntity empleado){
         EmpleadoEntity e = empleadoRepository.findByRut(empleado.getRut());
         // Se crea

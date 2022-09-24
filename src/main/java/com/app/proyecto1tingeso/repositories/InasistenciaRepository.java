@@ -17,4 +17,8 @@ public interface InasistenciaRepository extends JpaRepository<InasistenciaEntity
     @Query(value = "UPDATE inasistencias i SET i.dias_justificados = :d WHERE i.id = :id",
             nativeQuery = true)
     public void updateInasistenciaByJustificados(@Param("d") int d, @Param("id") long id);
+
+    @Query(value = "select * from inasistencias i where i.rut_empleado = :rut and i.mes = :mes and i.anio = :anio",
+            nativeQuery = true)
+    public InasistenciaEntity encontrarInasistenciaPorEmpleado(@Param("rut") String rut, @Param("mes") int mes, @Param("anio") int anio);
 }

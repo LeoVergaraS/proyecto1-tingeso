@@ -1,5 +1,6 @@
 package com.app.proyecto1tingeso.services;
 
+import com.app.proyecto1tingeso.entities.EmpleadoEntity;
 import com.app.proyecto1tingeso.entities.InasistenciaEntity;
 import com.app.proyecto1tingeso.repositories.InasistenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,35 @@ public class InasistenciaService {
         return (ArrayList<InasistenciaEntity>) inasistenciaRepository.findAll();
     }
 
-    public InasistenciaEntity guardarInasistencia(InasistenciaEntity inasistencia){
-        return inasistenciaRepository.save(inasistencia);
+    private boolean verificarInasistencia(InasistenciaEntity inasistencia){
+        String rut = inasistencia.getRut_empleado();
+        int mes = inasistencia.getMes();
+        int anio = inasistencia.getAnio();
+        InasistenciaEntity i = inasistenciaRepository.encontrarInasistenciaPorEmpleado(rut, mes, anio);
+        if(inasistencia.getId() == null){
+            if(i == null){return true;}
+            else{return false;}
+        }else{
+            if(i == null){return true;}
+            else if(inasistencia.getId() == i.getId()){return true;}
+            else{return false;}
+        }
+        
+    }
+
+    public InasistenciaEntity guardarInasistencia(InasistenciaEntity inasistencia, EmpleadoEntity empleado){
+        // Se crea
+        if(inasistencia.getId() == null){
+            if(empleado != null && verificarInasistencia(inasistencia)){
+                return inasistenciaRepository.save(inasistencia);
+            }else{return null;}
+        }
+        // Se actualiza
+        else{
+            if(empleado != null && verificarInasistencia(inasistencia)){
+                return inasistenciaRepository.save(inasistencia);}
+            else{return null;}
+        }        
     }
 
     public Optional<InasistenciaEntity> obtenerPorId(long id){
