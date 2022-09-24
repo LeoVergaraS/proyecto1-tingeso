@@ -24,13 +24,13 @@ public class EmpleadoController {
     public String listar(Model model){
         ArrayList<EmpleadoEntity>empleados=empleadoService.obtenerEmpleados();
         model.addAttribute("empleados",empleados);
-        return "listar";
+        return "empleado/listar";
     }
 
     @GetMapping("/nuevo")
     public String nuevo(Model model){
         model.addAttribute("empleado",new EmpleadoEntity());
-        return "form";
+        return "empleado/form";
     }
 
     @PostMapping("/guardar")
@@ -43,7 +43,7 @@ public class EmpleadoController {
     public String editar(@PathVariable long id, Model model){
         Optional<EmpleadoEntity> empleado=empleadoService.obtenerPorId(id);
         model.addAttribute("empleado",empleado.get());
-        return "form";
+        return "empleado/form";
     }
 
     @GetMapping("/eliminar/{id}")

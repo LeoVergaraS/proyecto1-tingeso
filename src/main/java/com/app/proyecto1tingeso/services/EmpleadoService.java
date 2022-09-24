@@ -19,7 +19,17 @@ public class EmpleadoService {
     }
 
     public EmpleadoEntity guardarEmpleado(EmpleadoEntity empleado){
-        return empleadoRepository.save(empleado);}
+        EmpleadoEntity e = empleadoRepository.findByRut(empleado.getRut());
+        // Se crea
+        if(empleado.getId() == null){
+            if(e == null){return empleadoRepository.save(empleado);}
+            else{return null;}
+        }
+        // Se actualiza
+        else{
+            return empleadoRepository.save(empleado);
+        }
+    }
 
     public Optional<EmpleadoEntity> obtenerPorId(Long id){
         return empleadoRepository.findById(id);}
