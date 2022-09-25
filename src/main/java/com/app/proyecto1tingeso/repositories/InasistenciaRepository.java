@@ -20,5 +20,5 @@ public interface InasistenciaRepository extends JpaRepository<InasistenciaEntity
 
     @Query(value = "select * from inasistencias i where i.rut_empleado = :rut and i.mes = :mes and i.anio = :anio",
             nativeQuery = true)
-    public InasistenciaEntity encontrarInasistenciaPorEmpleado(@Param("rut") String rut, @Param("mes") int mes, @Param("anio") int anio);
+    public InasistenciaEntity findInasistenciaEmpleadoByFecha(@Param("rut") String rut, @Param("mes") int mes, @Param("anio") int anio);
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.sql.Date;
 
 @Service
 public class RRHHService {
@@ -38,7 +39,7 @@ public class RRHHService {
     }
 
     public double bonificacionTiempoServicio(EmpleadoEntity empleado, int sueldoMensualFijo){
-        int anioIngreso = empleado.getFecha_de_ingreso().getYear();
+        int anioIngreso =  Integer.valueOf(empleado.getFecha_de_ingreso().toString().split("-")[0]);
         int anioActual = LocalDateTime.now().getYear();
         int anioServicio = anioActual - anioIngreso;
 

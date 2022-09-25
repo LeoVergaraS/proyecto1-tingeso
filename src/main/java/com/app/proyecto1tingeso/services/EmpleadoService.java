@@ -31,7 +31,9 @@ public class EmpleadoService {
         }
         // Se actualiza
         else{
-            return empleadoRepository.save(empleado);
+            if(e == null){return empleadoRepository.save(empleado);}
+            else if(e.getId() == empleado.getId()){return empleadoRepository.save(empleado);}
+            else{return null;}     
         }
     }
 

@@ -66,7 +66,43 @@
         </h2>
         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
           <div class="accordion-body">
-            aaaaaaaaaaaaaaaaaaaa
+            <form th:action="@{/sueldos/calcular}" class="form-group" method="get">
+              <div class="row">
+                <div class="col">
+                  <label>Fecha: </label>
+                  <input id="mesanio" name="mesanio" type="month">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <input type="submit" value="Ir" class="btn btn-success">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFive">
+          <button class="accordion-button collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+            Mostrar informe de sueldos
+          </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+          <div class="accordion-body">
+            <form th:action="@{/sueldos/listar}" class="form-group" method="get">
+              <div class="row">
+                <div class="col">
+                  <label>Fecha: </label>
+                  <input id="mesanio" name="mesanio" type="month">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <input type="submit" value="Ir" class="btn btn-success">
+                </div>
+              </div>
+            </form>    
           </div>
         </div>
       </div>

@@ -40,6 +40,10 @@ public class HoraExtraService {
         return horaExtraRepository.findById(id);
     }
 
+    public HoraExtraEntity obtenerHoraExtraPorEmpleadoYFecha(int mes, int anio, String rut){
+        return horaExtraRepository.findHoraExtraEmpleadoByFecha(mes, anio, rut);
+    }
+
     private int verificarRut(String rut, ArrayList<HoraExtraEntity> horasExtras){
         for(int i=0;i<horasExtras.size();i++){
             if(horasExtras.get(i).getRut_empleado().equals(rut)){

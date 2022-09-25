@@ -25,6 +25,15 @@ public class IngresoSalidaService {
         return (ArrayList<IngresoSalidaEntity>) ingresoSalidaRepository.findAll();
     }
 
+    public ArrayList<Integer> obtenerAtrasosEmpleado(String rut){
+        ArrayList<Integer> atrasos = new ArrayList<>();
+        atrasos.add(ingresoSalidaRepository.findAtrasosUno(rut));
+        atrasos.add(ingresoSalidaRepository.findAtrasosDos(rut));
+        atrasos.add(ingresoSalidaRepository.findAtrasosTres(rut));
+        atrasos.add(ingresoSalidaRepository.findAtrasosCuatro(rut));
+        return atrasos;
+    }
+
     public ArrayList<IngresoSalidaEntity> obtenerSalidas(){
         return (ArrayList<IngresoSalidaEntity>) ingresoSalidaRepository.findSalidas();
     }
@@ -41,34 +50,20 @@ public class IngresoSalidaService {
         return ingresoSalida;
     }
     
-    public ArrayList<IngresoSalidaEntity> transformarInformacion(){
+    public boolean guardarIngresoSalidaDeData(){
         String linea;
-        ArrayList<IngresoSalidaEntity> ingresosSalidas = new ArrayList<>();
         try{
             BufferedReader br = new BufferedReader(new FileReader("cargas//data.txt"));
             linea = br.readLine();
             while (linea != null){
-                ingresosSalidas.add(lineaAIngresoSalidaEntity(linea));
+                ingresoSalidaRepository.save(lineaAIngresoSalidaEntity(linea));
                 linea = br.readLine();
             }
             br.close();
-            return ingresosSalidas;
+            return true;
         }catch(FileNotFoundException ex){System.err.println(ex.getMessage());}
         catch(IOException ex){System.err.println(ex.getMessage());}
         catch (ParseException ex){System.err.println(ex.getMessage());}
-        return null;
-    }
-
-    public boolean guardarIngresoSalidaDeData(ArrayList<IngresoSalidaEntity> is){
-        if(!is.isEmpty()){
-            for(IngresoSalidaEntity ingresoSalida:is){
-                ingresoSalidaRepository.save(ingresoSalida);
-            }
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    
+        return false;
+    }  
 }

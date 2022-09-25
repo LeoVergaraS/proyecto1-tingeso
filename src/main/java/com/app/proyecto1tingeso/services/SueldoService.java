@@ -14,11 +14,11 @@ public class SueldoService {
     @Autowired
     SueldoRepository sueldoRepository;
 
-    public ArrayList<SueldoEntity> obtenerSueldos(){
-        return (ArrayList<SueldoEntity>) sueldoRepository.findAll();
-    }
-
     public SueldoEntity guardarSueldo(SueldoEntity sueldo){
         return sueldoRepository.save(sueldo);
+    }
+
+    public ArrayList<SueldoEntity> obtenerSueldosPorFecha(int mes, int anio){
+        return sueldoRepository.findSueldosbyFecha(mes, anio);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/archivos")
@@ -22,8 +23,13 @@ public class CargaController {
     }
 
     @PostMapping("/cargar")
-    public String carga(@RequestParam("archivos") MultipartFile archivo){
-        cargaService.guardarArchivo(archivo);
-        return "redirect:/ingresos_salidas/guardar";
+    public String carga(@RequestParam("archivos") MultipartFile archivo, RedirectAttributes ms){
+        if(archivo.getOriginalFilename().equals("data.txt")){
+            cargaService.guardarArchivo(archivo);
+            return "redirect:/ingresos_salidas/guardar";
+        }else{
+            ms.addFlashAttribute("mensaje","Nombre del archivo incorrecto");
+            return "redirect:/archivos/leer";
+        }
     }
 }

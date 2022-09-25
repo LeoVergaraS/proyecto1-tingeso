@@ -26,7 +26,7 @@ public class IngresoSalidaController {
 
     @GetMapping("/guardar")
     public String guardar(){
-        ingresoSalidaService.guardarIngresoSalidaDeData(ingresoSalidaService.transformarInformacion());
+        ingresoSalidaService.guardarIngresoSalidaDeData();
         return "redirect:/horas_extras/guardar";
     }
 }

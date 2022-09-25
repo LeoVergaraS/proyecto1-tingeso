@@ -22,7 +22,7 @@ public class InasistenciaService {
         String rut = inasistencia.getRut_empleado();
         int mes = inasistencia.getMes();
         int anio = inasistencia.getAnio();
-        InasistenciaEntity i = inasistenciaRepository.encontrarInasistenciaPorEmpleado(rut, mes, anio);
+        InasistenciaEntity i = inasistenciaRepository.findInasistenciaEmpleadoByFecha(rut, mes, anio);
         if(inasistencia.getId() == null){
             if(i == null){return true;}
             else{return false;}
@@ -32,6 +32,10 @@ public class InasistenciaService {
             else{return false;}
         }
         
+    }
+
+    public InasistenciaEntity obtenerInasistenciaPorEmpleadoYFecha(int mes, int anio, String rut){
+        return inasistenciaRepository.findInasistenciaEmpleadoByFecha(rut, mes, anio);
     }
 
     public InasistenciaEntity guardarInasistencia(InasistenciaEntity inasistencia, EmpleadoEntity empleado){

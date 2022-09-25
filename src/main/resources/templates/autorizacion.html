@@ -18,7 +18,7 @@
       </div>
       <div class="card-body">
         <p>¿Desea autorizar estas horas extras?</p>
-        <select th:default="${horaExtra.autorizado}" name="autorizado" id="autorizado">
+        <select th:field="${horaExtra.autorizado}" name="autorizado" id="autorizado">
             <option value="1">Autorizado</option>
             <option value="0">No autorizado</option>
         </select>
