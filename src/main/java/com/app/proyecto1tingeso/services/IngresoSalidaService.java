@@ -25,6 +25,10 @@ public class IngresoSalidaService {
         return (ArrayList<IngresoSalidaEntity>) ingresoSalidaRepository.findAll();
     }
 
+    public ArrayList<IngresoSalidaEntity> obtenerInasistenciasDeIngresoSalida(){
+        return ingresoSalidaRepository.findInasistencias();
+    }
+
     public ArrayList<Integer> obtenerAtrasosEmpleado(String rut){
         ArrayList<Integer> atrasos = new ArrayList<>();
         atrasos.add(ingresoSalidaRepository.findAtrasosUno(rut));

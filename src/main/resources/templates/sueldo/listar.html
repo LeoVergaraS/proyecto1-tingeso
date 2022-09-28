@@ -19,6 +19,10 @@
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
+                        <th>Rut</th>
+                        <th>Nombre empleado</th>
+                        <th>Cat</th>
+                        <th>Fecha de ingreso</th>
                         <th>Sueldo fijo mensual</th>
                         <th>Bonificacion años servicio</th>
                         <th>Pago horas extras</th>
@@ -27,21 +31,28 @@
                         <th>Cotización previsional</th>
                         <th>Cotización salud</th>
                         <th>Sueldo final</th>
-                        <th>Rut</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="sueldo:${sueldos}">
-                        <td th:text="${sueldo.sueldo_fijo_mensual}"></td>
-                        <td th:text="${sueldo.bonificacion_tiempo_servicio}"></td>
-                        <td th:text="${sueldo.pago_horas_extras}"></td>
-                        <td th:text="${sueldo.descuentos_atrasos}"></td>
-                        <td th:text="${sueldo.sueldo_bruto}"></td>
-                        <td th:text="${sueldo.descuentos_previsional}"></td>
-                        <td th:text="${sueldo.descuentos_salud}"></td>
-                        <td th:text="${sueldo.sueldo_final}"></td>
-                        <td th:text="${sueldo.rut}"></td>
-                    </tr>
+                    <div th:each="empleado:${empleados}">
+                        <tr th:each="sueldo:${sueldos}">
+                            <div th:if="${empleado.rut} == ${sueldo.rut}">
+                                <td th:text="${empleado.rut}"></td>
+                                <td th:text="${empleado.nombre} + ' ' + ${empleado.apellido}"></td>
+                                <td th:text="${empleado.categoria}"></td>
+                                <td th:text="${empleado.fecha_de_ingreso}"></td>
+                                <td th:text="${sueldo.sueldo_fijo_mensual}"></td>
+                                <td th:text="${sueldo.bonificacion_tiempo_servicio}"></td>
+                                <td th:text="${sueldo.pago_horas_extras}"></td>
+                                <td th:text="${sueldo.descuentos_atrasos}"></td>
+                                <td th:text="${sueldo.sueldo_bruto}"></td>
+                                <td th:text="${sueldo.descuentos_previsional}"></td>
+                                <td th:text="${sueldo.descuentos_salud}"></td>
+                                <td th:text="${sueldo.sueldo_final}"></td>
+                            </div>
+                        </tr>
+                    </div>
                     </tbody>
                 </table>
             </div>

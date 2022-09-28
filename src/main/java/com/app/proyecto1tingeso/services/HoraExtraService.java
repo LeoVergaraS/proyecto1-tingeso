@@ -27,6 +27,8 @@ public class HoraExtraService {
     public boolean guardarHoraExtra(ArrayList<HoraExtraEntity>  horasExtras){
         if(!horasExtras.isEmpty()){
             for(HoraExtraEntity he:horasExtras){
+                double cantidad_horas_extras = Math.round(he.getCantidad_horas_extras()*100.0)/100.0;
+                he.setCantidad_horas_extras(cantidad_horas_extras);
                 horaExtraRepository.save(he);
             }
             return true;
@@ -70,8 +72,8 @@ public class HoraExtraService {
             int posicion = verificarRut(rut, horasExtras);
             if(posicion >= 0){
                 HoraExtraEntity he = horasExtras.get(posicion);
-                double cantidad_horas_extras = calculoHorasExtras(i);
-                he.setCantidad_horas_extras(he.getCantidad_horas_extras() + cantidad_horas_extras);
+                double cantidad_horas_extras = he.getCantidad_horas_extras() + calculoHorasExtras(i);        
+                he.setCantidad_horas_extras(cantidad_horas_extras);
             }else{
                 double cantidad_horas_extras = calculoHorasExtras(i);
                 horasExtras.add(new HoraExtraEntity(null, mes, anio, cantidad_horas_extras, 0, rut)); 

@@ -36,12 +36,11 @@ public class HoraExtraController {
     }
 
     @GetMapping("/guardar")
-    public String guardar(RedirectAttributes ms){
+    public String guardar(){
         ArrayList<IngresoSalidaEntity> ingresosSalidas = ingresoSalidaService.obtenerSalidas();
         ArrayList<HoraExtraEntity> horasExtras = horaExtraService.calculoHorasExtrasPorEmpleado(ingresosSalidas);
         horaExtraService.guardarHoraExtra(horasExtras);
-        ms.addFlashAttribute("mensaje","Archivo guardado correctamente!!");
-        return "redirect:/archivos/leer";
+        return "redirect:/inasistencias/guardar_automatico";
     }
 
     @GetMapping("/autorizar/{id}")

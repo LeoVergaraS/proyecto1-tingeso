@@ -2,6 +2,8 @@ package com.app.proyecto1tingeso.services;
 
 import com.app.proyecto1tingeso.entities.EmpleadoEntity;
 import com.app.proyecto1tingeso.entities.InasistenciaEntity;
+import com.app.proyecto1tingeso.entities.IngresoSalidaEntity;
+import com.app.proyecto1tingeso.repositories.EmpleadoRepository;
 import com.app.proyecto1tingeso.repositories.InasistenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,26 @@ public class InasistenciaService {
 
     public InasistenciaEntity obtenerInasistenciaPorEmpleadoYFecha(int mes, int anio, String rut){
         return inasistenciaRepository.findInasistenciaEmpleadoByFecha(rut, mes, anio);
+    }
+
+    public boolean crearInasistencias(ArrayList<IngresoSalidaEntity> inasistencias){
+        if(inasistencias != null){
+            String[] fechaSeparada = inasistencias.get(0).getFecha().toString().split("-");
+            int anio = Integer.valueOf(fechaSeparada[0]);
+            int mes = Integer.valueOf(fechaSeparada[1]);
+            for(IngresoSalidaEntity i:inasistencias){
+                InasistenciaEntity inasistencia = inasistenciaRepository.findInasistenciaEmpleadoByFecha(i.getRut_empleado(), mes, anio);
+                if(inasistencia == null){
+                    inasistenciaRepository.save(new InasistenciaEntity(null,mes,anio,1,0,i.getRut_empleado()));
+                }else{
+                    inasistencia.setCantidad_de_dias(inasistencia.getCantidad_de_dias() + 1);
+                    inasistenciaRepository.save(inasistencia);
+                }
+            }
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public InasistenciaEntity guardarInasistencia(InasistenciaEntity inasistencia, EmpleadoEntity empleado){
