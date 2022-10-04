@@ -1,0 +1,26 @@
+version: "3.0"
+services:
+  mysql-db:
+    image: mysql
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: mueblesstgo
+    ports:
+      - 3307:3306
+  mueblesstgo:
+    container_name: aplicacion1tingeso
+    image: leovergaras/aplicacion1tingeso
+    ports:
+      - "8001:8090"
+    environment:
+      - DB_URL=jdbc:mysql=jdbc:mysql://mysql-db:3306/mueblesstgo
+      - DB_USERNAME=root
+      - DB_ROOT=123456
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - mysql-db

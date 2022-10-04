@@ -19,7 +19,7 @@ public class CargaController {
 
     @GetMapping("/leer")
     public String read(){
-        return "leer";
+        return "archivo/leer";
     }
 
     @PostMapping("/cargar")

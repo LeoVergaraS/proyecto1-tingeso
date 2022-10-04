@@ -43,11 +43,11 @@ public class RRHHService {
         int anioActual = LocalDateTime.now().getYear();
         int anioServicio = anioActual - anioIngreso;
 
-        if(anioServicio >= 25){return sueldoMensualFijo * 0.17;}
-        else if(anioServicio >= 20){return sueldoMensualFijo * 0.14;}
-        else if(anioServicio >= 15){return sueldoMensualFijo * 0.11;}
-        else if(anioServicio >= 10){return sueldoMensualFijo * 0.08;}
-        else if(anioServicio >= 5){return sueldoMensualFijo * 0.05;}
+        if(anioServicio >= 25){return Math.round(sueldoMensualFijo * 0.17);}
+        else if(anioServicio >= 20){return Math.round(sueldoMensualFijo * 0.14);}
+        else if(anioServicio >= 15){return Math.round(sueldoMensualFijo * 0.11);}
+        else if(anioServicio >= 10){return Math.round(sueldoMensualFijo * 0.08);}
+        else if(anioServicio >= 5){return Math.round(sueldoMensualFijo * 0.05);}
         else{return 0;}
     }
 

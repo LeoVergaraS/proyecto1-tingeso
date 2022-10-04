@@ -36,6 +36,16 @@ public class InasistenciaService {
         
     }
 
+    public ArrayList<Integer> verificarInasistenciaPorEmepleadoYRut(int mes, int anio, String rut, ArrayList<Integer> tiempos){
+        InasistenciaEntity inasistencia = inasistenciaRepository.findInasistenciaEmpleadoByFecha(rut, mes, anio);
+        if(inasistencia != null){
+            tiempos.add(inasistencia.getCantidad_de_dias() - inasistencia.getDias_justificados());
+        }else{
+            tiempos.add(0);
+        }
+        return tiempos;
+    }
+
     public InasistenciaEntity obtenerInasistenciaPorEmpleadoYFecha(int mes, int anio, String rut){
         return inasistenciaRepository.findInasistenciaEmpleadoByFecha(rut, mes, anio);
     }
@@ -81,14 +91,5 @@ public class InasistenciaService {
 
     public void actualizarJustificativo(long id, int d){
         inasistenciaRepository.updateInasistenciaByJustificados(d, id);
-    }
-
-    public boolean eliminarInasistencia(long id){
-        try{
-            inasistenciaRepository.deleteById(id);
-            return true;
-        }catch(Exception err){
-           return false;
-        }
     }
 }

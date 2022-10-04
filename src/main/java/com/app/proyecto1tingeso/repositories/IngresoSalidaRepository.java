@@ -29,4 +29,7 @@ public interface IngresoSalidaRepository extends JpaRepository<IngresoSalidaEnti
     @Query(value = "SELECT * FROM ingresos_salidas i WHERE i.hora > '9:10' and '18:00' > i.hora", nativeQuery = true)
     public ArrayList<IngresoSalidaEntity> findInasistencias();
 
+    @Query(value = "SELECT * FROM ingresos_salidas i WHERE i.hora > '8:10' and '9:10' >= i.hora", nativeQuery = true)
+    public ArrayList<IngresoSalidaEntity> findAtrasos();
+
 }

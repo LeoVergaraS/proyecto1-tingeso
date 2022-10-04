@@ -41,7 +41,12 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
           <div class="accordion-body">
-            <form action="" class="form-group">
+            <form th:action="@{/inasistencias/justificar}" class="form-group" method="get">
+              <label>Fecha: </label>
+              <input id="mesanio" name="mesanio" type="month">
+              <label>Rut: </label>
+              <input id="rut" name="rut" type="text">
+              <input type="submit" value="Ir" class="btn btn-success">
             </form>
           </div>
         </div>
@@ -54,7 +59,13 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
           <div class="accordion-body">
-            aaaaaaaaaaaaaaaaaaa
+            <form th:action="@{/horas_extras/autorizar}" class="form-group" method="get">
+              <label>Fecha: </label>
+              <input id="mesanio" name="mesanio" type="month">
+              <label>Rut: </label>
+              <input id="rut" name="rut" type="text">
+              <input type="submit" value="Ir" class="btn btn-success">
+            </form>
           </div>
         </div>
       </div>

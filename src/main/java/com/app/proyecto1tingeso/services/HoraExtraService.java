@@ -24,35 +24,8 @@ public class HoraExtraService {
         horaExtraRepository.updateHorasExtrasByAutorizados(a, id);
     }
 
-    public boolean guardarHoraExtra(ArrayList<HoraExtraEntity>  horasExtras){
-        if(!horasExtras.isEmpty()){
-            for(HoraExtraEntity he:horasExtras){
-                double cantidad_horas_extras = Math.round(he.getCantidad_horas_extras()*100.0)/100.0;
-                he.setCantidad_horas_extras(cantidad_horas_extras);
-                horaExtraRepository.save(he);
-            }
-            return true;
-        }else{
-            return false;
-        }
-    
-    }
-
-    public Optional<HoraExtraEntity> obtenerHoraExtraPorId(long id){
-        return horaExtraRepository.findById(id);
-    }
-
     public HoraExtraEntity obtenerHoraExtraPorEmpleadoYFecha(int mes, int anio, String rut){
         return horaExtraRepository.findHoraExtraEmpleadoByFecha(mes, anio, rut);
-    }
-
-    private int verificarRut(String rut, ArrayList<HoraExtraEntity> horasExtras){
-        for(int i=0;i<horasExtras.size();i++){
-            if(horasExtras.get(i).getRut_empleado().equals(rut)){
-                return i;
-            }
-        }
-        return -1;
     }
 
     private double calculoHorasExtras(IngresoSalidaEntity ingresoSalida){
@@ -62,24 +35,36 @@ public class HoraExtraService {
         return (total - 1080)/60;
     }
 
-    public ArrayList<HoraExtraEntity> calculoHorasExtrasPorEmpleado(ArrayList<IngresoSalidaEntity> ingresoSalida){
-        ArrayList<HoraExtraEntity> horasExtras = new ArrayList<>();
+    public double verificarHorasExtras(int mes, int anio, String rut){
+        HoraExtraEntity horaExtra = horaExtraRepository.findHoraExtraEmpleadoByFecha(mes, anio, rut);
+        if(horaExtra == null){
+            return 0;
+        }else{
+            if(horaExtra.getAutorizado() == 1){
+                return horaExtra.getCantidad_horas_extras();
+            }else{
+                return 0;
+            }
+        }
+    }
+
+    public boolean guardarHorasExtrasPorEmpleado(ArrayList<IngresoSalidaEntity> ingresoSalida){
         String[] fechaSeparada = ingresoSalida.get(0).getFecha().toString().split("-");
         int mes = Integer.valueOf(fechaSeparada[1]);
         int anio = Integer.valueOf(fechaSeparada[0]);
         for(IngresoSalidaEntity i:ingresoSalida){
             String rut = i.getRut_empleado();
-            int posicion = verificarRut(rut, horasExtras);
-            if(posicion >= 0){
-                HoraExtraEntity he = horasExtras.get(posicion);
-                double cantidad_horas_extras = he.getCantidad_horas_extras() + calculoHorasExtras(i);        
-                he.setCantidad_horas_extras(cantidad_horas_extras);
+            HoraExtraEntity horaExtra = horaExtraRepository.findHoraExtraEmpleadoByFecha(mes, anio, rut);
+            if(horaExtra != null){
+                double cantidad_horas_extras = horaExtra.getCantidad_horas_extras() + Math.floor(calculoHorasExtras(i));        
+                horaExtra.setCantidad_horas_extras(cantidad_horas_extras);
+                horaExtraRepository.save(horaExtra);
             }else{
-                double cantidad_horas_extras = calculoHorasExtras(i);
-                horasExtras.add(new HoraExtraEntity(null, mes, anio, cantidad_horas_extras, 0, rut)); 
+                double cantidad_horas_extras = Math.floor(calculoHorasExtras(i));
+                horaExtraRepository.save(new HoraExtraEntity(null, mes, anio, cantidad_horas_extras, 0, rut)); 
             }
         }
-        return horasExtras;
+        return true;
     }
 
 

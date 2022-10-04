@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Inicio</title>
+  <title>Atrasos</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -10,25 +10,41 @@
 </head>
 <body>
   <div th:replace="~{commons/navbar::topbar}" ></div>
-<div class="container">
-  <form th:action="@{/horas_extras/editar_autorizacion/} + ${horaExtra.id}" class="form-group" th:object="${horaExtra}" method="post">
-    <div class="card">
-      <div class="card-header">
-        <h2>Autorización de las horas extras</h2>
-      </div>
-      <div class="card-body">
-        <p>¿Desea autorizar estas horas extras?</p>
-        <select th:field="${horaExtra.autorizado}" name="autorizado" id="autorizado">
-            <option value="1">Autorizado</option>
-            <option value="0">No autorizado</option>
-        </select>
-      </div>
-      <div class="card-footer">
-        <input type="submit" value="Justificar" class="btn btn-success">
-        <a th:href="@{/inasistencias/listar}" class="btn btn-primary" role="button">Volver</a>
-      </div>
+<div class="container-sm" style="margin-top:50px;">
+  <div class="card">
+    <div class="card-header">
+      <h2>Atrasos</h2>
     </div>
-  </form>
+    <div class="card-body">
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Mes</th>
+          <th>Año</th>
+          <th>10 min</th>
+          <th>25 min</th>
+          <th>45 min</th>
+          <th>Rut empleado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="atraso:${atrasos}">
+          <td th:text="${atraso.id}"></td>
+          <td th:text="${atraso.mes}"></td>
+          <td th:text="${atraso.anio}"></td>
+          <td th:text="${atraso.atraso_10min}"></td>
+          <td th:text="${atraso.atraso_25min}"></td>
+          <td th:text="${atraso.atraso_45min}"></td>
+          <td th:text="${atraso.rut_empleado}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      <a href="/" class="btn btn-primary" role="button">Volver</a>
+    </div>
+  </div>
 </div>
 </body>
 </html>

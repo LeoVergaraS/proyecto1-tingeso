@@ -25,7 +25,6 @@
           <th>Horas Extras</th>
           <th>Autorizada</th>
           <th>Rut empleado</th>
-          <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -41,9 +40,6 @@
             <td>Autorizado</td>
           </div>
           <td th:text="${he.rut_empleado}"></td>
-          <td>
-            <a th:href="@{/horas_extras/autorizar/} + ${he.id}" class="btn btn-primary" role="button">Autorizar</a>
-          </td>
         </tr>
         </tbody>
       </table>

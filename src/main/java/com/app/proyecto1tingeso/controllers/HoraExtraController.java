@@ -32,22 +32,31 @@ public class HoraExtraController {
     public String listar(Model model){
         ArrayList<HoraExtraEntity> horasExtras = horaExtraService.obtenerHorasExtras();
         model.addAttribute("horasExtras", horasExtras);
-        return "listarhe";
+        return "horaExtra/listar";
     }
 
     @GetMapping("/guardar")
     public String guardar(){
         ArrayList<IngresoSalidaEntity> ingresosSalidas = ingresoSalidaService.obtenerSalidas();
-        ArrayList<HoraExtraEntity> horasExtras = horaExtraService.calculoHorasExtrasPorEmpleado(ingresosSalidas);
-        horaExtraService.guardarHoraExtra(horasExtras);
+        horaExtraService.guardarHorasExtrasPorEmpleado(ingresosSalidas);
         return "redirect:/inasistencias/guardar_automatico";
     }
 
-    @GetMapping("/autorizar/{id}")
-    public String autorizar(@PathVariable long id, Model model){
-        Optional<HoraExtraEntity> horaExtra = horaExtraService.obtenerHoraExtraPorId(id);
-        model.addAttribute("horaExtra", horaExtra.get());
-        return "autorizacion";
+    @GetMapping("/autorizar")
+    public String autorizar(@RequestParam("mesanio") String mesyanio, @RequestParam("rut") String rut, Model model){
+        if(!mesyanio.isBlank() && !rut.isBlank()){
+            String[] fechaSeparada = mesyanio.split("-");
+            int mes = Integer.valueOf(fechaSeparada[1]);
+            int anio = Integer.valueOf(fechaSeparada[0]);;
+            HoraExtraEntity horaExtra = horaExtraService.obtenerHoraExtraPorEmpleadoYFecha(mes, anio, rut);
+            if(horaExtra != null){
+                model.addAttribute("horaExtra",horaExtra);
+                return "horaExtra/autorizacion";
+            }else{
+                return "redirect:/";
+            } 
+        }
+        return "redirect:/";
     }
 
     @PostMapping("/editar_autorizacion/{id}")

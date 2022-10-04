@@ -21,11 +21,12 @@ public class IngresoSalidaController {
     public String listar(Model model){
         ArrayList<IngresoSalidaEntity> ingresosSalidas=ingresoSalidaService.obtenerIngresoSalida();
         model.addAttribute("ingresosSalidas",ingresosSalidas);
-        return "listaris";
+        return "ingresoSalida/listar";
     }
 
     @GetMapping("/guardar")
     public String guardar(){
+        ingresoSalidaService.eliminarIngresoSalida();
         ingresoSalidaService.guardarIngresoSalidaDeData();
         return "redirect:/horas_extras/guardar";
     }

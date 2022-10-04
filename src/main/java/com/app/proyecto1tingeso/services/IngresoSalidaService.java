@@ -29,13 +29,8 @@ public class IngresoSalidaService {
         return ingresoSalidaRepository.findInasistencias();
     }
 
-    public ArrayList<Integer> obtenerAtrasosEmpleado(String rut){
-        ArrayList<Integer> atrasos = new ArrayList<>();
-        atrasos.add(ingresoSalidaRepository.findAtrasosUno(rut));
-        atrasos.add(ingresoSalidaRepository.findAtrasosDos(rut));
-        atrasos.add(ingresoSalidaRepository.findAtrasosTres(rut));
-        atrasos.add(ingresoSalidaRepository.findAtrasosCuatro(rut));
-        return atrasos;
+    public ArrayList<IngresoSalidaEntity> obtenerAtrasosDeIngresoSalida(){
+        return ingresoSalidaRepository.findAtrasos();
     }
 
     public ArrayList<IngresoSalidaEntity> obtenerSalidas(){
@@ -70,4 +65,8 @@ public class IngresoSalidaService {
         catch (ParseException ex){System.err.println(ex.getMessage());}
         return false;
     }  
+
+    public void eliminarIngresoSalida(){
+        ingresoSalidaRepository.deleteAll();
+    }
 }

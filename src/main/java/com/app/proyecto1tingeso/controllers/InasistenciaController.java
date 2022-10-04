@@ -55,11 +55,10 @@ public class InasistenciaController {
     }
 
     @GetMapping("/guardar_automatico")
-    public String guardar(RedirectAttributes ms){
+    public String guardar(){
         ArrayList<IngresoSalidaEntity> inasistencias = ingresoSalidaService.obtenerInasistenciasDeIngresoSalida();
         inasistenciaService.crearInasistencias(inasistencias);
-        ms.addFlashAttribute("mensaje","Archivo guardado correctamente!!");
-        return "redirect:/archivos/leer";
+        return "redirect:/atrasos/crear";
     }
 
     @GetMapping("/editar/{id}")
@@ -70,22 +69,26 @@ public class InasistenciaController {
 
     }
 
+    @GetMapping("/justificar")
+    public String justificar(@RequestParam("mesanio") String mesyanio, @RequestParam("rut") String rut, Model model){
+        if(!mesyanio.isBlank() && !rut.isBlank()){
+            String[] fechaSeparada = mesyanio.split("-");
+            int mes = Integer.valueOf(fechaSeparada[1]);
+            int anio = Integer.valueOf(fechaSeparada[0]);;
+            InasistenciaEntity inasistencia = inasistenciaService.obtenerInasistenciaPorEmpleadoYFecha(mes, anio, rut);
+            if(inasistencia != null){
+                model.addAttribute("inasistencia",inasistencia);
+                return "inasistencia/justificacion";
+            }else{
+                return "redirect:/";
+            } 
+        }
+        return "redirect:/";
+    }
+
     @PostMapping("/editar_justificativos/{id}")
     public String mandar(@PathVariable long id, @RequestParam("dias_justificados") int d){
         inasistenciaService.actualizarJustificativo(id, d);
-        return "redirect:/inasistencias/listar";
-    }
-
-    @GetMapping("/justificar/{id}")
-    public String justificar(@PathVariable long id, Model model){
-        Optional<InasistenciaEntity> inasistencia=inasistenciaService.obtenerPorId(id);
-        model.addAttribute("inasistencia",inasistencia.get());
-        return "inasistencia/justificacion";
-    }
-
-    @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable long id){
-        inasistenciaService.eliminarInasistencia(id);
         return "redirect:/inasistencias/listar";
     }
 }

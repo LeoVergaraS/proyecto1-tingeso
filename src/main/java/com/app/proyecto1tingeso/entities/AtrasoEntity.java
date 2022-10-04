@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AtrasosEntity {
+public class AtrasoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
@@ -22,6 +22,5 @@ public class AtrasosEntity {
     private int atraso_10min;
     private int atraso_25min;
     private int atraso_45min;
-    private int atraso_70min;
     private String rut_empleado;
 }

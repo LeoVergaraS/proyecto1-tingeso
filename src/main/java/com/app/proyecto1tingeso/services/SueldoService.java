@@ -21,4 +21,8 @@ public class SueldoService {
     public ArrayList<SueldoEntity> obtenerSueldosPorFecha(int mes, int anio){
         return sueldoRepository.findSueldosbyFecha(mes, anio);
     }
+
+    public void eliminarSueldos(){
+       sueldoRepository.deleteAll(); 
+    }
 }

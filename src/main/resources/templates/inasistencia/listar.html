@@ -26,7 +26,7 @@
           <th>Inasistencias</th>
           <th>Justificadas</th>
           <th>Rut empleado</th>
-          <th>Acciones</th>
+          <th>Editar</th>
         </tr>
         </thead>
         <tbody>
@@ -39,8 +39,6 @@
           <td th:text="${inasistencia.rut_empleado}"></td>
           <td>
             <a th:href="@{/inasistencias/editar/} + ${inasistencia.id}" class="btn btn-primary" role="button">Editar</a>
-            <a th:href="@{/inasistencias/eliminar/} + ${inasistencia.id}" class="btn btn-danger" role="button">Eliminar</a>
-            <a th:href="@{/inasistencias/justificar/} + ${inasistencia.id}" class="btn btn-danger" role="button">Justificar</a>
           </td>
         </tr>
         </tbody>

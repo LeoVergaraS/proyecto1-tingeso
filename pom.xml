@@ -67,6 +67,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>proyecto1-tingeso</finalName>
 	</build>
 
 </project>
