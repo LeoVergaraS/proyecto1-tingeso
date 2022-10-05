@@ -58,9 +58,7 @@ public class SueldoController {
             ArrayList<EmpleadoEntity> empleados = empleadoService.obtenerEmpleados();
             for(EmpleadoEntity e:empleados){
                 tiempoAtraso = atrasoService.verificarAtrasosPorEmpleadoYFecha(mes, anio, e.getRut());
-                System.out.println(tiempoAtraso);
                 tiempoAtraso = inasistenciaService.verificarInasistenciaPorEmepleadoYRut(mes, anio, e.getRut(), tiempoAtraso);
-                System.out.println(tiempoAtraso);
                 double horaExtra = horaExtraService.verificarHorasExtras(mes, anio, e.getRut()); 
                 int sueldoMensualFijo = rrhhService.sueldoMensualFijoEmpleado(e);
                 double bonificacionTiempoServicio = rrhhService.bonificacionTiempoServicio(e, sueldoMensualFijo);

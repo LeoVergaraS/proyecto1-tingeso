@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 @Service
 public class CargaService {
-    private String carpeta = "cargas//";
+    private String carpeta = "./";
     private final Logger logg = LoggerFactory.getLogger(CargaService.class);
 
     public String guardarArchivo(MultipartFile archivo){

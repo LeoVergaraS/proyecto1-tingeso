@@ -52,7 +52,7 @@ public class IngresoSalidaService {
     public boolean guardarIngresoSalidaDeData(){
         String linea;
         try{
-            BufferedReader br = new BufferedReader(new FileReader("cargas//data.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("./data.txt"));
             linea = br.readLine();
             while (linea != null){
                 ingresoSalidaRepository.save(lineaAIngresoSalidaEntity(linea));

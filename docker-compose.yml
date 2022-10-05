@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.8"
 services:
   mysql-db:
     image: mysql
@@ -8,15 +8,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: mueblesstgo
+      DB_DIALECT: MySQL8Dialect
     ports:
       - 3307:3306
   mueblesstgo:
     container_name: aplicacion1tingeso
     image: leovergaras/aplicacion1tingeso
     ports:
-      - "8001:8090"
+      - '8090:8090'
     environment:
-      - DB_URL=jdbc:mysql=jdbc:mysql://mysql-db:3306/mueblesstgo
+      - DB_URL=jdbc:mysql://mysql-db:3306/mueblesstgo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
       - DB_USERNAME=root
       - DB_ROOT=123456
     deploy:
