@@ -24,16 +24,11 @@ public class CargaController {
 
     @PostMapping("/cargar")
     public String carga(@RequestParam("archivos") MultipartFile archivo, RedirectAttributes ms){
-        if(archivo.getOriginalFilename() == null){
-            if(archivo.getOriginalFilename().equals("data.txt")){
-                cargaService.guardarArchivo(archivo);
-                return "redirect:/ingresos_salidas/guardar";
-            }else{
-                ms.addFlashAttribute("mensaje","Nombre del archivo incorrecto");
-                return "redirect:/archivos/leer";
-            }
+        if(archivo.getOriginalFilename().equals("data.txt")){
+            cargaService.guardarArchivo(archivo);
+            return "redirect:/ingresos_salidas/guardar";
         }else{
-            ms.addFlashAttribute("mensaje","Formato del archivo incorrecto");
+            ms.addFlashAttribute("mensaje","Nombre del archivo incorrecto");
             return "redirect:/archivos/leer";
         }
     }
