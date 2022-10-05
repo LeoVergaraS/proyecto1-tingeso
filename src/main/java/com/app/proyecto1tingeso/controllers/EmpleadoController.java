@@ -42,8 +42,13 @@ public class EmpleadoController {
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable long id, Model model){
         Optional<EmpleadoEntity> empleado=empleadoService.obtenerPorId(id);
-        model.addAttribute("empleado",empleado.get());
-        return "empleado/form";
+        if(!empleado.isEmpty()){
+            model.addAttribute("empleado",empleado.get());
+            return "empleado/form";
+        }else{
+            return "redirect:/empleados/listar";
+        }
+
     }
 
     @GetMapping("/eliminar/{id}")

@@ -64,9 +64,12 @@ public class InasistenciaController {
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable long id, Model model){
         Optional<InasistenciaEntity> inasistencia=inasistenciaService.obtenerPorId(id);
-        model.addAttribute("inasistencia",inasistencia.get());
-        return "inasistencia/form";
-
+        if(!inasistencia.isEmpty()){
+            model.addAttribute("inasistencia",inasistencia.get());
+            return "inasistencia/form";
+        }else{
+            return "redirect:/inasistencias/listar";
+        }
     }
 
     @GetMapping("/justificar")
