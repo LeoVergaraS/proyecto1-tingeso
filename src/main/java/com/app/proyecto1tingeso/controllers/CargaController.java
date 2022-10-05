@@ -24,7 +24,7 @@ public class CargaController {
 
     @PostMapping("/cargar")
     public String carga(@RequestParam("archivos") MultipartFile archivo, RedirectAttributes ms){
-        if(archivo.getOriginalFilename().equals(null)){
+        if(archivo.getOriginalFilename() == null){
             if(archivo.getOriginalFilename().equals("data.txt")){
                 cargaService.guardarArchivo(archivo);
                 return "redirect:/ingresos_salidas/guardar";
