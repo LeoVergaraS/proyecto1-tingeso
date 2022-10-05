@@ -6,12 +6,14 @@ import com.app.proyecto1tingeso.services.SueldoService;
 import org.junit.jupiter.api.Test;
 
 import com.app.proyecto1tingeso.entities.EmpleadoEntity;
+import org.springframework.test.context.TestPropertySource;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.ArrayList;
 
+@TestPropertySource(locations = "classpath:test.properties")
 public class RRHHServiceTests {
     EmpleadoEntity empleadoEntity = new EmpleadoEntity();
     RRHHService rrhhService = new RRHHService();

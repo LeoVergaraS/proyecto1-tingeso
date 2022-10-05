@@ -10,11 +10,11 @@ pipeline{
                 bat 'mvn clean install -DskipTests'
             }
         }
-        // stage('Test'){
-        //     steps{
-        //         bat 'mvn test'
-        //     }
-        // }
+        stage('Test'){
+            steps{
+                bat 'mvn test'
+            }
+        }
         stage('Build Docker Image'){
             steps{
                 bat 'docker build -t leovergaras/aplicacion1tingeso .'
